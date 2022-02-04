@@ -18,18 +18,16 @@ const PaymentTypeRange: React.FC<SuperRadioPropsType> = (
     }
 ) => {
     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>, o: string) => {
-        // onChange && onChange(e)
         onChangeOption && onChangeOption(o)
         setResult && setResult(false)
         setAddResult && setAddResult(false)
     }
 
-    // map options with key
     const mappedOptions: JSX.Element[] = options ? options.map((o, i) => (
         <div key={name + '-' + i} className="calculator-data__radio">
             <input
                 type={'radio'}
-                                name={name}
+                name={name}
                 checked={value === o}
                 onChange={(e) => onChangeCallback(e, o)}
                 tabIndex={4}
@@ -44,5 +42,4 @@ const PaymentTypeRange: React.FC<SuperRadioPropsType> = (
         </>
     )
 }
-
 export default PaymentTypeRange

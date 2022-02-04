@@ -1,8 +1,7 @@
 .container {
-
     width: 60vw;
     margin: 0 auto;
-    margin-top: 50px;
+    margin-top: 10px;
     padding-top: 10px;
 }
 
@@ -15,7 +14,6 @@
     font-size: 18px;
     background-color: rgba(249, 247, 246, 0.9);
     margin-top: 20px;
-
 }
 
 .calculator h3 {
@@ -30,43 +28,34 @@
 .calculator-record__radio {
     display: flex;
     flex-direction: row;
-    /*margin: 3px 5px 3px 0px;*/
 }
 
 .calculator-names {
-    /*display: flex;*/
     width: 30%;
-   /* background-color: #EEF4FF;*/
     margin: 3px 0px 3px;
 }
 .calculator-names__reference {
-    /*display: flex;*/
     width: 40%;
     font-size: 14px;
     font-style:  italic;
-    /* background-color: #EEF4FF;*/
     margin: 4px 0px 4px;
 }
 
-/*.calculator-names p {
-  padding: 7px 0;
-}*/
 .calculator-data {
     width: 20%;
     font-size: 14px;
-    background-color: #EEF4FF;
+    background-color: white;
     margin: 3px 0px 3px;
 }
 
 .calculator-data__select {
     width: 21%;
     font-size: 14px;
-    background-color: #EEF4FF;
+    background-color: white;
     margin: 3px 0px 3px;
 }
 .calculator-data__radio {
     width: 25%;
-    /*background-color: antiquewhite;*/
     margin: 3px 3px 0px;
 }
 .calculator-data__result {
@@ -76,59 +65,13 @@
     background-color: white;
     margin: 3px 0px 3px;
 }
-/*
-.currency ul {
-  list-style: none;
-  display: inline;
-}
-
-.currency li {
-  display: inline-block;
-  margin-right: 10px;
-  cursor: pointer;
-}
-*/
-
-/*.calculator-action {
-  display: flex;
-  justify-content: space-between;
-}*/
-
 .calculator-action button {
     width: 40%;
     text-align: center;
     padding: 10px;
     border: 2px solid cornflowerblue;
     border-radius: 10px;
-    /*  color: cornflowerblue;*/
     color: white;
-    /*background-color: cornflowerblue;*/
     cursor: pointer;
     margin: 10px 0px 10px;
-}
-
-/*.currency-action span.active {
-  color: white;
-  background-color: cornflowerblue;
-}*/
-.currencies {
-    padding: 5px 10px;
-    border: 2px solid cornflowerblue;
-    color: cornflowerblue;
-}
-
-.activeCurrency {
-    background-color: cornflowerblue;
-    color: white;
-}
-
-.fields label {
-    display: block;
-    margin-bottom: 20px;
-}
-
-.fields label input {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
 }

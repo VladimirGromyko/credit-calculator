@@ -1,6 +1,5 @@
 import React from 'react'
 import s from '../components/ResultForm.module.css'
-
 import {creditInfoType} from "../containers/utils/resultCalcFloating";
 
 type ResultFormType = {
@@ -10,12 +9,10 @@ type ResultFormType = {
 export const ResultForm: React.FC<ResultFormType> =
     ({creditInfo}) => {
         let today = new Date()
-        /*const stringDate = today && today.toLocaleDateString()*/
 
         const paymentDate = (index: number) => {
             const newDate = new Date()
             newDate.setMonth(today.getMonth() + index)
-            console.log(index)
             if (newDate.getMonth() === 2 && today.getDay() > 28) newDate.setDate(28)
             return newDate.toLocaleDateString()
         }
@@ -30,15 +27,14 @@ export const ResultForm: React.FC<ResultFormType> =
                     <div className={s.resultFormName}>Total payment for the period</div>
                     <div className={s.resultFormName}>Balance on the loan body</div>
                 </div>
-
             )
         }
-        const detailFormBody: any[] = creditInfo ? creditInfo.map((el, index) => {
+        const detailFormBody: JSX.Element[] = creditInfo ? creditInfo.map((el, index) => {
 
             return (
                 <div key={index + 1} className={s.resultFormNameTitle}>
                     <div className={s.resultFormNameNumber}>{index + 1}</div>
-                    <div className={s.resultFormNameNumber}>{paymentDate((index +1))}</div>
+                    <div className={s.resultFormNameNumber}>{paymentDate((index + 1))}</div>
                     <div className={s.resultFormName}>{el.percent}</div>
                     <div className={s.resultFormName}>{el.mainPayment}</div>
                     <div className={s.resultFormName}>{el.totalPaymentInPeriod}</div>

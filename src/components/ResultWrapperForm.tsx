@@ -41,14 +41,14 @@ export const ResultWrapperForm: React.FC<ResultFormType> =
 
                     <div className="calculator-record">
                         <div className="calculator-names">Monthly payment (BYN):</div>
-                        {paymentTypeByAmount===FLOATING_PAYMENT ?
-                        <>
-                            <div className="calculator-data__result">max: {creditInfo[0].totalPaymentInPeriod}</div>
-                            <div
-                                className="calculator-data__result">min: {creditInfo[period].totalPaymentInPeriod}</div>
-                        </>
+                        {paymentTypeByAmount === FLOATING_PAYMENT ?
+                            <>
+                                <div className="calculator-data__result">max: {creditInfo[0].totalPaymentInPeriod}</div>
+                                <div
+                                    className="calculator-data__result">min: {creditInfo[period].totalPaymentInPeriod}</div>
+                            </>
                             :
-                        <div className="calculator-data__result">{creditInfo[0].totalPaymentInPeriod}</div>
+                            <div className="calculator-data__result">{creditInfo[0].totalPaymentInPeriod}</div>
                         }
                     </div>
 
@@ -64,14 +64,9 @@ export const ResultWrapperForm: React.FC<ResultFormType> =
                     </div>
 
                     <div className="calculator-action">
-                        {/*<button onClick={onClickHandler}></button>*/}
                         <SuperButton onClick={onClickHandler}>payment details</SuperButton>
                     </div>
-
-
                 </div>
-
-
                 {
                     showAddResult && <ResultForm creditInfo={creditInfo}/>
                 }

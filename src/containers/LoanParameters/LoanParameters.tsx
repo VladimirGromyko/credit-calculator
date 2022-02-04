@@ -1,12 +1,10 @@
 import PaymentTypeRange from "../../components/PaymentTypeRange";
 import {ChangeEvent, KeyboardEvent, useState} from "react";
 import SelectPaymentTerms from "../../components/SelectPaymentTerms";
-
 import {ResultWrapperForm} from "../../components/ResultWrapperForm";
 import {checkValue} from "../utils/checkValue";
 import SuperButton from "../../components/common/SuperButton";
 import {rateApi} from "../../api/rate-api";
-
 
 export const FIXED_PAYMENT = 'fixed payment (annuity)'
 export const FLOATING_PAYMENT = 'floating payment (declining balance)'
@@ -17,7 +15,6 @@ let initialRate = "5"
 
 
 export const LoanParameters = () => {
-
 
     const [creditAmount, onChangeAmount] = useState<string>("1000")
     const [valueTerm, onChangeTerm] = useState<string>(creditTerm[3])
@@ -72,10 +69,8 @@ export const LoanParameters = () => {
                            value={creditAmount}
                            onChange={changeCreditAmount}
                            onKeyPress={onKeyPressTaskHandler}
-                           data-currency="amount"
                            tabIndex={1}
                            onClick={onClickAmountHandler}
-
                     />
                 </div>
                 <div className="calculator-record">
@@ -83,7 +78,6 @@ export const LoanParameters = () => {
                         Credit term:
                     </div>
                     <SelectPaymentTerms
-                        /*data-currency="term"*/
                         className="calculator-data__select"
                         options={creditTerm}
                         valueTerm={valueTerm}
@@ -101,10 +95,10 @@ export const LoanParameters = () => {
                            onChange={setRateHandler}
                            onKeyPress={onKeyPressTaskHandler}
                            onClick={onClickAmountHandler}
-                           data-currency="rate"
                            tabIndex={3}
                     />
-                    <div className="calculator-names__reference">* National Bank refinancing rate {refinancingRate}</div>
+                    <div className="calculator-names__reference">* National Bank refinancing
+                        rate {refinancingRate}</div>
                 </div>
 
                 <div className="calculator-record__radio">
@@ -118,18 +112,12 @@ export const LoanParameters = () => {
                         onChangeOption={onChangeOption}
                         setResult={setResult}
                         setAddResult={setAddResult}
-                        data-currency="rate"
                     />
                 </div>
                 <div/>
 
                 <div className="calculator-action">
                     <SuperButton onClick={onCalculate}>Calculate payments</SuperButton>
-
-                    {/*                    <button data-action="сalculate-payments" onClick={onCalculate}>
-                        Calculate payments
-                    </button>*/}
-
                 </div>
             </div>
             {showResult && <ResultWrapperForm
