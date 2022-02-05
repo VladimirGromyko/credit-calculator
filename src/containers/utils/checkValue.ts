@@ -9,5 +9,6 @@ export const checkValue = (value: string): boolean => {
     if (value.indexOf('.', 0) > 0) {
         if (l && l > 2) isSuit = false
     }
+
     return isSuit
 }

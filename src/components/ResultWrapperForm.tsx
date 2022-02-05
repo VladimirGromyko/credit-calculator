@@ -3,6 +3,7 @@ import {ResultForm} from "./ResultForm";
 import {resultCalcFloating} from "../containers/utils/resultCalcFloating";
 import SuperButton from "./common/SuperButton";
 import {FLOATING_PAYMENT} from "../containers/LoanParameters/LoanParameters";
+import {appearanceOfValue} from "../containers/utils/appearanceOfValue";
 
 type ResultFormType = {
     creditAmount: string
@@ -32,7 +33,10 @@ export const ResultWrapperForm: React.FC<ResultFormType> =
                 <div className="calculator"><h3>Main results</h3>
                     <div className="calculator-record">
                         <div className="calculator-names">Amount of credit (BYN):</div>
-                        <div className="calculator-data__result">{creditAmount}</div>
+                        <div className="calculator-data__result">
+                            <div>{appearanceOfValue(+creditAmount)[0]}</div>
+                            <div className="fraction">{appearanceOfValue(+creditAmount)[1]}</div>
+                        </div>
                     </div>
                     <div className="calculator-record">
                         <div className="calculator-names">Credit term (months):</div>
@@ -43,24 +47,54 @@ export const ResultWrapperForm: React.FC<ResultFormType> =
                         <div className="calculator-names">Monthly payment (BYN):</div>
                         {paymentTypeByAmount === FLOATING_PAYMENT ?
                             <>
-                                <div className="calculator-data__result">max: {creditInfo[0].totalPaymentInPeriod}</div>
-                                <div
-                                    className="calculator-data__result">min: {creditInfo[period].totalPaymentInPeriod}</div>
+                                <div className="calculator-data__result">
+                                    <div className='result__div'>max:</div>
+                                    <div className='result__div'>
+                                        <div>{appearanceOfValue(creditInfo[0].totalPaymentInPeriod)[0]}</div>
+                                        <div className="fraction">
+                                            {appearanceOfValue(creditInfo[0].totalPaymentInPeriod)[1]}
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div className="calculator-data__result">
+                                    <div className='result__div'>min:</div>
+                                    <div className='result__div'>
+                                        <div>{appearanceOfValue(creditInfo[period].totalPaymentInPeriod)[0]}</div>
+                                        <div className="fraction">
+                                            {appearanceOfValue(creditInfo[period].totalPaymentInPeriod)[1]}
+                                        </div>
+                                    </div>
+                                </div>
                             </>
                             :
-                            <div className="calculator-data__result">{creditInfo[0].totalPaymentInPeriod}</div>
+                            <div className="calculator-data__result">
+                                <div>{appearanceOfValue(creditInfo[0].totalPaymentInPeriod)[0]}</div>
+                                <div className="fraction">
+                                    {appearanceOfValue(creditInfo[0].totalPaymentInPeriod)[1]}
+                                </div>
+                            </div>
                         }
                     </div>
 
                     <div className="calculator-record">
                         <div className="calculator-names">Total credit payments (BYN):</div>
-                        <div
-                            className="calculator-data__result">{(creditInfo[period].totalCumulativePayment).toFixed(2)}</div>
+                        <div className="calculator-data__result">
+                            <div>{appearanceOfValue(creditInfo[period].totalCumulativePayment)[0]}</div>
+                            <div className="fraction">
+                                {appearanceOfValue(creditInfo[period].totalCumulativePayment)[1]}
+                            </div>
+                        </div>
                     </div>
 
                     <div className="calculator-record">
                         <div className="calculator-names">Total repayments (BYN):</div>
-                        <div className="calculator-data__result">{creditInfo[period].totalCumulativeOverpayment}</div>
+                        <div className="calculator-data__result">
+                            <div>{appearanceOfValue(creditInfo[period].totalCumulativeOverpayment)[0]}</div>
+                            <div className="fraction">
+                                {appearanceOfValue(creditInfo[period].totalCumulativeOverpayment)[1]}
+                            </div>
+                        </div>
                     </div>
 
                     <div className="calculator-action">

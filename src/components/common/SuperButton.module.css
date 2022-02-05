@@ -13,10 +13,10 @@
 }
 .default {
     display: block;
-    width: 10ch;
     background: var(--group-background-focus);
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 3vmin;
+    margin: 0 1px 0;
 }
 .default:hover {
     box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);

@@ -1,6 +1,7 @@
 import React from 'react'
 import s from '../components/ResultForm.module.css'
 import {creditInfoType} from "../containers/utils/resultCalcFloating";
+import {appearanceOfValue} from "../containers/utils/appearanceOfValue";
 
 type ResultFormType = {
     creditInfo: creditInfoType[]
@@ -20,9 +21,9 @@ export const ResultForm: React.FC<ResultFormType> =
         const detailForm = () => {
             return (
                 <div className={s.resultFormNameTitle}>
-                    <div className={s.resultFormNameNumber}># payment</div>
-                    <div className={s.resultFormNameNumber}>Date</div>
-                    <div className={s.resultFormName}>Interest payment</div>
+                    <div className={s.resultFormNameNumber}># pay ment</div>
+                    <div className={s.resultFormName}>Date</div>
+                    <div className={s.resultFormInterest}>Interest payment</div>
                     <div className={s.resultFormName}>Principal payment</div>
                     <div className={s.resultFormName}>Total payment for the period</div>
                     <div className={s.resultFormName}>Balance on the loan body</div>
@@ -33,12 +34,24 @@ export const ResultForm: React.FC<ResultFormType> =
 
             return (
                 <div key={index + 1} className={s.resultFormNameTitle}>
-                    <div className={s.resultFormNameNumber}>{index + 1}</div>
-                    <div className={s.resultFormNameNumber}>{paymentDate((index + 1))}</div>
-                    <div className={s.resultFormName}>{el.percent}</div>
-                    <div className={s.resultFormName}>{el.mainPayment}</div>
-                    <div className={s.resultFormName}>{el.totalPaymentInPeriod}</div>
-                    <div className={s.resultFormName}>{el.amountForEndPeriod}</div>
+                    <div className={s.resultFormDataNumber}>{index + 1}</div>
+                    <div className={s.resultFormData}>{paymentDate((index + 1))}</div>
+                    <div className={s.resultFormDataInterest}>
+                        <div>{appearanceOfValue(el.percent)[0]}</div>
+                        <div className={s.fraction}>{appearanceOfValue(el.percent)[1]}</div>
+                    </div>
+                    <div className={s.resultFormData}>
+                        <div>{appearanceOfValue(el.mainPayment)[0]}</div>
+                        <div className={s.fraction}>{appearanceOfValue(el.mainPayment)[1]}</div>
+                    </div>
+                    <div className={s.resultFormData}>
+                        <div>{appearanceOfValue(el.totalPaymentInPeriod)[0]}</div>
+                        <div className={s.fraction}>{appearanceOfValue(el.totalPaymentInPeriod)[1]}</div>
+                    </div>
+                    <div className={s.resultFormData}>
+                        <div>{appearanceOfValue(el.amountForEndPeriod)[0]}</div>
+                        <div className={s.fraction}>{appearanceOfValue(el.amountForEndPeriod)[1]}</div>
+                    </div>
                 </div>
             )
         }) : []

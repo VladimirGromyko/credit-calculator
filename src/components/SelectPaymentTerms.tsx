@@ -19,18 +19,19 @@ const SelectPaymentTerms: React.FC<SuperSelectPropsType> = (
     }
 ) => {
 
+    const termOptions = (term: string) => {
+        let ternValue = Number(term)
+        if (ternValue===1) {return `${ternValue} month`}
+        if (ternValue>1 && ternValue<12) {return `${ternValue} months`}
+        if (ternValue===12) {return `${ternValue/12} year`}
+        if (ternValue>12) {return `${ternValue/12} years`}
+    }
+
     const mappedOptions: JSX.Element[] = options ? options.map((o, i) => {
         return <option key={restProps.name + '-' + i}
                        value={o}
                        style={{background: '#EEF4FF'}}
-        >{+o < 2
-            ? `${o} month`
-            : +o < 12
-                ? `${o} months`
-                : +o < 24
-                    ? `${+o / 12} year`
-                    : `${+o / 12} years`}
-
+        > {termOptions(o)}
         </option>
     }) : [];
 

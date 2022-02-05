@@ -1,10 +1,10 @@
 import PaymentTypeRange from "../../components/PaymentTypeRange";
-import {ChangeEvent, KeyboardEvent, useState} from "react";
+import {KeyboardEvent, useState} from "react";
 import SelectPaymentTerms from "../../components/SelectPaymentTerms";
 import {ResultWrapperForm} from "../../components/ResultWrapperForm";
-import {checkValue} from "../utils/checkValue";
 import SuperButton from "../../components/common/SuperButton";
 import {rateApi} from "../../api/rate-api";
+import {AddAmountForm} from "../../components/AddAmountForm";
 
 export const FIXED_PAYMENT = 'fixed payment (annuity)'
 export const FLOATING_PAYMENT = 'floating payment (declining balance)'
@@ -13,10 +13,9 @@ const arr = [FIXED_PAYMENT, FLOATING_PAYMENT]
 export const creditTerm: string[] = ["1", "3", "6", "12", "24", "60"]
 let initialRate = "5"
 
-
 export const LoanParameters = () => {
 
-    const [creditAmount, onChangeAmount] = useState<string>("1000")
+    const [creditAmount, onChangeAmount] = useState<string>("10000")
     const [valueTerm, onChangeTerm] = useState<string>(creditTerm[3])
     const [paymentTypeByAmount, onChangeOption] = useState<string>(arr[0])
     const [showResult, setResult] = useState<boolean>(false)
@@ -24,37 +23,27 @@ export const LoanParameters = () => {
     const [rate, setRate] = useState<string>(initialRate)
     const [refinancingRate, setRefinancingRate] = useState<number>(0)
     const [isQuery, setQuery] = useState<boolean>(true)
+    const [errorInput, setErrorInput] = useState<string | boolean>(false)
 
     isQuery && rateApi.getRate()
         .then((res) => {
-
-                isQuery && setRate(String((+initialRate) + res[0].Value))
-                isQuery && setRefinancingRate(res[0].Value)
+                setRate(String((+initialRate) + res[0].Value))
+                setRefinancingRate(res[0].Value)
                 setQuery(false)
             }
         )
-
-    const changeCreditAmount = (e: ChangeEvent<HTMLInputElement>) => {
-        setResult(false)
-        let value = e.currentTarget.value;
-        checkValue(value) && onChangeAmount(value)
-    }
-
     const onCalculate = () => {
-        setResult(true)
+        if ((!!+creditAmount) && (!!+rate)) setResult(true)
+        if ((!+creditAmount) || (!+rate)) {
+            setErrorInput('Credit input parameters are incorrect!!!')
+        }
     }
     const onClickAmountHandler = () => {
         setResult(false)
         setAddResult(false)
-    }
-    const setRateHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setResult(false)
-
-        let value = e.currentTarget.value;
-        checkValue(value) && setRate(value)
+        setErrorInput(false)
     }
     const onKeyPressTaskHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-
         if (e.key === 'Enter') {
             onCalculate()
         }
@@ -62,16 +51,16 @@ export const LoanParameters = () => {
 
     return (
         <div>
-            <div className="calculator"><h3>Сredit input parameters</h3>
+            <div className="calculator"><h3>Credit input parameters</h3>
                 <div className="calculator-record">
                     <div className="calculator-names">Amount of credit (BYN):</div>
-                    <input className="calculator-data"
-                           value={creditAmount}
-                           onChange={changeCreditAmount}
-                           onKeyPress={onKeyPressTaskHandler}
-                           tabIndex={1}
-                           onClick={onClickAmountHandler}
-                    />
+                    <AddAmountForm amount={creditAmount}
+                                   changeFunction={onChangeAmount}
+                                   setResult={setResult}
+                                   onClickAmountHandler={onClickAmountHandler}
+                                   onKeyPressTaskHandler={onKeyPressTaskHandler}
+                                   tab={1} />
+
                 </div>
                 <div className="calculator-record">
                     <div className="calculator-names">
@@ -90,15 +79,14 @@ export const LoanParameters = () => {
                     <div className="calculator-names">
                         Interest rate:
                     </div>
-                    <input className="calculator-data"
-                           value={rate}
-                           onChange={setRateHandler}
-                           onKeyPress={onKeyPressTaskHandler}
-                           onClick={onClickAmountHandler}
-                           tabIndex={3}
-                    />
-                    <div className="calculator-names__reference">* National Bank refinancing
-                        rate {refinancingRate}</div>
+                    <AddAmountForm amount={rate}
+                                   changeFunction={setRate}
+                                   setResult={setResult}
+                                   onClickAmountHandler={onClickAmountHandler}
+                                   onKeyPressTaskHandler={onKeyPressTaskHandler}
+                                   tab={3} />
+                    <div className="calculator-names__reference">* National Bank refinancing rate {refinancingRate}
+                    </div>
                 </div>
 
                 <div className="calculator-record__radio">
@@ -114,21 +102,24 @@ export const LoanParameters = () => {
                         setAddResult={setAddResult}
                     />
                 </div>
-                <div/>
-
-                <div className="calculator-action">
-                    <SuperButton onClick={onCalculate}>Calculate payments</SuperButton>
+                <div className="calculator-action__record">
+                    <div className="calculator-action button">
+                        <SuperButton onClick={onCalculate}>Calculate payments</SuperButton>
+                    </div>
+                    <div className="calculator-action__error">
+                        {(errorInput !== false) && <div>{errorInput}</div>}</div>
                 </div>
             </div>
-            {showResult && <ResultWrapperForm
-                creditAmount={creditAmount}
-                creditTerm={valueTerm}
-                rate={+rate}
-                paymentTypeByAmount={paymentTypeByAmount}
-                showAddResult={showAddResult}
-                setAddResult={setAddResult}
-
-            />}
+            {
+                (showResult) && <ResultWrapperForm
+                    creditAmount={creditAmount}
+                    creditTerm={valueTerm}
+                    rate={+rate}
+                    paymentTypeByAmount={paymentTypeByAmount}
+                    showAddResult={showAddResult}
+                    setAddResult={setAddResult}
+                />
+            }
         </div>
     )
 }
