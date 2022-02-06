@@ -4,6 +4,7 @@ import {resultCalcFloating} from "../containers/utils/resultCalcFloating";
 import SuperButton from "./common/SuperButton";
 import {FLOATING_PAYMENT} from "../containers/LoanParameters/LoanParameters";
 import {appearanceOfValue} from "../containers/utils/appearanceOfValue";
+import {precisionRound} from "../containers/utils/precisionRound";
 
 type ResultFormType = {
     creditAmount: string
@@ -90,9 +91,9 @@ export const ResultWrapperForm: React.FC<ResultFormType> =
                     <div className="calculator-record">
                         <div className="calculator-names">Total repayments (BYN):</div>
                         <div className="calculator-data__result">
-                            <div>{appearanceOfValue(creditInfo[period].totalCumulativeOverpayment)[0]}</div>
+                            <div>{appearanceOfValue(precisionRound((creditInfo[period].totalCumulativePayment-(+creditAmount)),2))[0]}</div>
                             <div className="fraction">
-                                {appearanceOfValue(creditInfo[period].totalCumulativeOverpayment)[1]}
+                                {appearanceOfValue(precisionRound((creditInfo[period].totalCumulativePayment-(+creditAmount)),2))[1]}
                             </div>
                         </div>
                     </div>
