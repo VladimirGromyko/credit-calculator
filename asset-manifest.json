@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/credit-calculator/static/css/main.03aef1ac.css",
-    "main.js": "/credit-calculator/static/js/main.2079d93f.js",
+    "main.css": "/credit-calculator/static/css/main.7e86913d.css",
+    "main.js": "/credit-calculator/static/js/main.b204ffd5.js",
     "static/js/787.6b16e8fa.chunk.js": "/credit-calculator/static/js/787.6b16e8fa.chunk.js",
     "index.html": "/credit-calculator/index.html",
-    "main.03aef1ac.css.map": "/credit-calculator/static/css/main.03aef1ac.css.map",
-    "main.2079d93f.js.map": "/credit-calculator/static/js/main.2079d93f.js.map",
+    "main.7e86913d.css.map": "/credit-calculator/static/css/main.7e86913d.css.map",
+    "main.b204ffd5.js.map": "/credit-calculator/static/js/main.b204ffd5.js.map",
     "787.6b16e8fa.chunk.js.map": "/credit-calculator/static/js/787.6b16e8fa.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.03aef1ac.css",
-    "static/js/main.2079d93f.js"
+    "static/css/main.7e86913d.css",
+    "static/js/main.b204ffd5.js"
   ]
 }
